@@ -1,0 +1,8 @@
+flask_app/__pycache__/
+flask_app/database.db 
+flutter_app/build/
+flutter_app/.idea/
+flutter_app/.packages
+flutter_app/android/.gradle/
+flutter_app/.flutter-plugins
+.vscode/
