@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert' as convert;
 import 'API.dart';
 
 class RegisterRoute extends API {
@@ -10,18 +10,18 @@ class RegisterRoute extends API {
 }
 
 class RegisterRouteState extends APIState {
+  String URL;
+  String URLSuffix = "register";
 
-  String URL ;
-  String URLSuffix = "register" ;
-
-  String appBarTitle = "Registration" ;
+  String appBarTitle = "Registration";
 
   var messages = {
-    "success" : {"dialogHead":"Registration completed",
-                  "dialogMessage":"You can now log in"} ,
-    "failure" : {"dialogHead" : "Registration error"}
-  } ;
-
+    "success": {
+      "dialogHead": "Registration completed",
+      "dialogMessage": "You can now log in"
+    },
+    "failure": {"dialogHead": "Registration error"}
+  };
 
   @override
   onSuccess() async {
@@ -29,9 +29,9 @@ class RegisterRouteState extends APIState {
     // then navigate to login page
 
     setState(() {
-      dialogHead = messages["success"]["dialogHead"] ;
-      dialogMessage = messages["success"]["dialogMessage"] ;
-      success = true ;
+      dialogHead = messages["success"]["dialogHead"];
+      dialogMessage = messages["success"]["dialogMessage"];
+      success = true;
     });
     showAlertDialog();
     //Navigator.pushReplacementNamed(context, '/login');
@@ -39,23 +39,26 @@ class RegisterRouteState extends APIState {
 
   @override
   void onDialogPressed() {
-    if(success){
+    if (success) {
       // Close the dialoge
-      Navigator.pop(context) ;
+      Navigator.pop(context);
 
       //Route to login page
-      Navigator.pushReplacementNamed(context, '/login') ;
-    }
-    else{
-      Navigator.pop(context) ;
+      Navigator.pushReplacementNamed(context, '/login');
+    } else {
+      Navigator.pop(context);
     }
   }
 
   @override
   Map<String, String> getBody() {
-    return {"username": username,"fullname":fullname, "password": password, "email": email};
+    return {
+      "username": username,
+      "fullname": fullname,
+      "password": password,
+      "email": email
+    };
   }
-
 
   @override
   Widget getForm() {
@@ -116,19 +119,18 @@ class RegisterRouteState extends APIState {
                     children: <Widget>[
                       new Text("Already registered ? "),
                       new InkWell(
-                        onTap: (){
-                          Navigator.pushReplacementNamed(context, "/login") ;
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, "/login");
                         },
                         child: new Text(
                           "Log in now",
                           style: new TextStyle(color: Colors.blueAccent),
-
                         ),
                       )
                     ],
                   ))
             ],
           ),
-        )) ;
+        ));
   }
 }

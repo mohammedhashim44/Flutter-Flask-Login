@@ -40,7 +40,7 @@ class ProfileRouteState extends State<ProfileRoute> {
       opacity: opacity,
       child:  new Container(
         margin: const EdgeInsets.only(top: 20.0),
-        child : new Text(string ,
+        child : new Text("Welcome" ,
           style: new TextStyle(
               color: Colors.white ,
               fontSize: textSize
