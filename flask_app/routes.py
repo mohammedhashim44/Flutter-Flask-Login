@@ -13,21 +13,25 @@ def login():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    msg = ""
-    if not username or not password : 
-        msg = {"status" : { "type" : "failure" ,   "message" : "Missing Data"}}
-        return jsonify(msg)
-    
+    if not validate_string(username) or not validate_string(password):
+        status = False
+        message = "Invalid data"
+        response = construct_response(status=status,message=message)
+        return jsonify(response)
+
     user = User.query.filter_by(username=username).first() 
     if user is None or not user.check_password(password) :
-        msg = {"status" : { "type" : "failure" ,   "message" : "Username or password incorrect"}}
-    else:
-        msg = {"status" : { "type" : "success" ,
-                             "message" : "You logged in"} , 
-               "data" : {"user" : user.getJsonData() }
-        }
+        status = False
+        message = "Username or password incorrect"
+        response = construct_response(status=status, message=message)
+        return jsonify(response)
 
-    return jsonify(msg)
+    else:
+        status = True
+        message = "User logged in"
+        data = user.getJsonData()
+        response = construct_response(status=status, message=message,data=data)
+        return jsonify(response)
 
 @app.route('/API/register', methods=['POST'])
 def register():
@@ -36,19 +40,27 @@ def register():
     password = request.form.get('password')
     email = request.form.get('email')
 
-    msg = ""
-    if not username or not password or not email or not fullname : 
-        msg = {"status" : { "type" : "failure" ,   "message" : "missing data"}}
-        return jsonify(msg)
-    
-    if User.query.filter_by(username=username).count() == 1 : 
-        msg = {"status" : { "type" : "failure" ,   "message" : "username already taken"}}
-        return jsonify(msg)
-    
+    valid_input = validate_list_of_strings([username,fullname,password,email])
+    if not valid_input:
+        status = False
+        message = "Invalid data"
+        response = construct_response(status=status, message=message)
+        return jsonify(response)
+
+
+    if User.query.filter_by(username=username).count() == 1 :
+        status = False
+        message = "Username already taken"
+        response = construct_response(status=status, message=message)
+        return jsonify(response)
+
     if User.query.filter_by(email=email).count() == 1 : 
-        msg = {"status" : { "type" : "failure" ,   "message" : "email already taken"}}
-        return jsonify(msg)
-    
+        status = False
+        message = "Email already taken"
+        response = construct_response(status=status, message=message)
+        return jsonify(response)
+
+    # Create new user
     u = User()
     u.username = username 
     u.fullname = fullname
@@ -56,7 +68,29 @@ def register():
     u.set_password(password) 
 
     db.session.add(u)
-    db.session.commit() 
+    db.session.commit()
 
-    msg = {"status" : { "type" : "success" ,   "message" : "You have registered"}}
-    return jsonify(msg)
+    status = True
+    message = "You have been registered"
+    response = construct_response(status=status, message=message)
+    return jsonify(response)
+
+
+# Helpers
+def validate_string(input):
+    if input is None or not input.strip():
+        return False
+    return True
+
+def validate_list_of_strings(list):
+    for i in list:
+        if not validate_string(i):
+            return False
+    return True
+
+def construct_response(status,message,data=None):
+    return {
+        "status" : status,
+        "message" : message,
+        "data" : data
+    }
