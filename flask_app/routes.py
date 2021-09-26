@@ -1,11 +1,11 @@
-
-from flask import Flask , request , jsonify
-from app import app , db
+from flask import Flask, request, jsonify
+from app import app, db
 from models import User
 
-@app.route('/') 
+
+@app.route('/')
 def home():
-    return "Home" 
+    return "Home"
 
 
 @app.route('/API/login', methods=['POST'])
@@ -16,11 +16,11 @@ def login():
     if not validate_string(username) or not validate_string(password):
         status = False
         message = "Invalid data"
-        response = construct_response(status=status,message=message)
+        response = construct_response(status=status, message=message)
         return jsonify(response)
 
-    user = User.query.filter_by(username=username).first() 
-    if user is None or not user.check_password(password) :
+    user = User.query.filter_by(username=username).first()
+    if user is None or not user.check_password(password):
         status = False
         message = "Username or password incorrect"
         response = construct_response(status=status, message=message)
@@ -30,8 +30,9 @@ def login():
         status = True
         message = "User logged in"
         data = user.getJsonData()
-        response = construct_response(status=status, message=message,data=data)
+        response = construct_response(status=status, message=message, data=data)
         return jsonify(response)
+
 
 @app.route('/API/register', methods=['POST'])
 def register():
@@ -40,21 +41,20 @@ def register():
     password = request.form.get('password')
     email = request.form.get('email')
 
-    valid_input = validate_list_of_strings([username,fullname,password,email])
+    valid_input = validate_list_of_strings([username, fullname, password, email])
     if not valid_input:
         status = False
         message = "Invalid data"
         response = construct_response(status=status, message=message)
         return jsonify(response)
 
-
-    if User.query.filter_by(username=username).count() == 1 :
+    if User.query.filter_by(username=username).count() == 1:
         status = False
         message = "Username already taken"
         response = construct_response(status=status, message=message)
         return jsonify(response)
 
-    if User.query.filter_by(email=email).count() == 1 : 
+    if User.query.filter_by(email=email).count() == 1:
         status = False
         message = "Email already taken"
         response = construct_response(status=status, message=message)
@@ -62,10 +62,10 @@ def register():
 
     # Create new user
     u = User()
-    u.username = username 
+    u.username = username
     u.fullname = fullname
-    u.email = email 
-    u.set_password(password) 
+    u.email = email
+    u.set_password(password)
 
     db.session.add(u)
     db.session.commit()
@@ -82,15 +82,17 @@ def validate_string(input):
         return False
     return True
 
+
 def validate_list_of_strings(list):
     for i in list:
         if not validate_string(i):
             return False
     return True
 
-def construct_response(status,message,data=None):
+
+def construct_response(status, message, data=None):
     return {
-        "status" : status,
-        "message" : message,
-        "data" : data
+        "status": status,
+        "message": message,
+        "data": data
     }

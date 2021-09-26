@@ -1,15 +1,14 @@
-
-from flask import Flask , request , jsonify
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import os 
+import os
 
-app = Flask(__name__) 
+app = Flask(__name__)
 app.secret_key = "super secret key"
 
-currentDirectory = os.getcwd() 
-databasePath = os.path.join(currentDirectory , "database.db")
+currentDirectory = os.getcwd()
+databasePath = os.path.join(currentDirectory, "database.db")
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+databasePath
-db = SQLAlchemy(app) 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + databasePath
+db = SQLAlchemy(app)
+import routes, models
 
-import routes , models 
