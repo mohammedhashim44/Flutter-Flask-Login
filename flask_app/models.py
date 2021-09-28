@@ -21,5 +21,6 @@ class User(db.Model):
         return {
             "username": self.username,
             "fullname": self.fullname,
-            "email": self.email
+            "email": self.email,
+            "login_counts" : self.login_counts,
         }
