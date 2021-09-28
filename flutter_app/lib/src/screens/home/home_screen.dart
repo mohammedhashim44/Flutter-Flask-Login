@@ -54,7 +54,7 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
 
   Widget _buildAppBar() {
     return AppBar(
-      title: Text('Profile Screen'),
+      title: Text('Home Screen'),
       actions: <Widget>[
         Row(
           children: <Widget>[
@@ -71,7 +71,10 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
               onTap: () {
                 Navigator.pushNamed(context, '/settings');
               },
-            )
+            ),
+            SizedBox(
+              width: 20,
+            ),
           ],
         )
       ],
