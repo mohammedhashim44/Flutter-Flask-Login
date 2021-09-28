@@ -15,7 +15,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    _resolveNextPage();
+    //_resolveNextPage();
   }
 
   void _resolveNextPage() async {
@@ -48,13 +48,17 @@ class _LandingScreenState extends State<LandingScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Spacer(),
               FlutterLogo(
-                size: MediaQuery.of(context).size.width / 3,
+                size: MediaQuery.of(context).size.width / 2,
               ),
-              SizedBox(
-                height: 40,
-              ),
+              Spacer(),
               CircularProgressIndicator(),
+              SizedBox(height: 30,),
+              Text("Loading",style: TextStyle(
+                fontSize: 20,
+              ),),
+              Spacer(),
             ],
           ),
         ),
