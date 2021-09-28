@@ -79,7 +79,7 @@ class _RegisterBuilderScreenState extends State<RegisterBuilderScreen> {
 
   Widget _buildAppBar() {
     return AppBar(
-      title: Text("RegisterBuilder Screen"),
+      title: Text("Register Screen"),
       actions: [
         Container(
           margin: EdgeInsets.symmetric(
