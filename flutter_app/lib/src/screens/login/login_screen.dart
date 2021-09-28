@@ -88,11 +88,16 @@ class _LoginScreenBuilderState extends State<LoginScreenBuilder> {
     return AppBar(
       title: Text("Login Screen"),
       actions: [
-        InkWell(
-          child: Icon(Icons.settings),
-          onTap: () {
-            Navigator.pushNamed(context, '/settings');
-          },
+        Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: InkWell(
+            child: Icon(Icons.settings),
+            onTap: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+          ),
         )
       ],
     );

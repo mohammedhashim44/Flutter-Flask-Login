@@ -81,11 +81,16 @@ class _RegisterBuilderScreenState extends State<RegisterBuilderScreen> {
     return AppBar(
       title: Text("RegisterBuilder Screen"),
       actions: [
-        InkWell(
-          child: Icon(Icons.settings),
-          onTap: () {
-            Navigator.pushNamed(context, '/settings');
-          },
+        Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 20,
+          ),
+          child: InkWell(
+            child: Icon(Icons.settings),
+            onTap: () {
+              Navigator.pushNamed(context, '/settings');
+            },
+          ),
         )
       ],
     );
