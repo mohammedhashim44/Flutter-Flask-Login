@@ -19,6 +19,7 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   void _resolveNextPage() async {
+    await Future.delayed(Duration(seconds: 3));
     if (await _navigateIfUserLoggedIn()) return;
 
     await _navigateToLoginScreen();
