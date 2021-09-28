@@ -3,8 +3,8 @@ import 'package:flutter_flask_login/src/screens/home/home_screen.dart';
 import 'package:flutter_flask_login/src/screens/landing_screen.dart';
 import 'package:flutter_flask_login/src/screens/login/login_screen.dart';
 import 'package:flutter_flask_login/src/screens/register/register_screen.dart';
+import 'package:flutter_flask_login/src/screens/settings_screen.dart';
 
-import '../SettingsRoute.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/register' : (context) => RegisterScreen(),
         '/home': (context) => HomeScreen(),
-        '/settings': (context) => SettingsRoute()
+        '/settings': (context) => SettingsScreen()
       },
     );
   }

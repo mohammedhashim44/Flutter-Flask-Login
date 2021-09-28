@@ -3,19 +3,19 @@ import 'package:flutter_flask_login/src/repositories/settings_repository.dart';
 import 'package:flutter_flask_login/src/utils/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'src/repositories/network/api_repository.dart';
-import 'src/repositories/network/api_repository.dart';
-import 'src/utils/service_locator.dart';
-import 'src/utils/service_locator.dart';
-import 'src/widgets/dialogues.dart';
-import 'src/widgets/dialogues.dart';
+import '../repositories/network/api_repository.dart';
+import '../repositories/network/api_repository.dart';
+import '../utils/service_locator.dart';
+import '../utils/service_locator.dart';
+import '../widgets/dialogues.dart';
+import '../widgets/dialogues.dart';
 
-class SettingsRoute extends StatefulWidget {
+class SettingsScreen extends StatefulWidget {
   @override
-  SettingsRouteState createState() => SettingsRouteState();
+  SettingsScreenState createState() => SettingsScreenState();
 }
 
-class SettingsRouteState extends State<SettingsRoute> {
+class SettingsScreenState extends State<SettingsScreen> {
   var settingsRepo = serviceLocator.get<SettingsRepository>();
 
   var formKey = GlobalKey<FormState>();
