@@ -14,8 +14,11 @@ def test_api():
 @app.route('/API/login', methods=['POST'])
 def login():
     time.sleep(1)
-    username = request.form.get('username')
-    password = request.form.get('password')
+
+    content = request.json
+
+    username = get_value_from_dict(content,"username")
+    password = get_value_from_dict(content,"password")
 
     if not validate_string(username) or not validate_string(password):
         status = False
@@ -33,7 +36,6 @@ def login():
     else:
         status = True
         message = "User logged in"
-        #data = user.getJsonData()
         data = {"token" : str(user.id)}
         response = construct_response(status=status, message=message, data=data)
         return jsonify(response)
@@ -42,7 +44,8 @@ def login():
 @app.route('/API/get_profile', methods=['POST'])
 def get_profile():
     time.sleep(1)
-    token = request.form.get('token')
+    content = request.json
+    token = get_value_from_dict(content,"token")
 
     user = User.query.filter_by(id=token).first()
     if user is None:
@@ -62,10 +65,13 @@ def get_profile():
 @app.route('/API/register', methods=['POST'])
 def register():
     time.sleep(1)
-    username = request.form.get('username')
-    fullname = request.form.get('fullname')
-    password = request.form.get('password')
-    email = request.form.get('email')
+
+    content = request.json
+
+    username = get_value_from_dict(content,'username')
+    fullname = get_value_from_dict(content,'fullname')
+    password = get_value_from_dict(content,'password')
+    email = get_value_from_dict(content,'email')
 
     valid_input = validate_list_of_strings([username, fullname, password, email])
     if not valid_input:
@@ -115,6 +121,10 @@ def validate_list_of_strings(list):
             return False
     return True
 
+def get_value_from_dict(dict,key):
+    if key not in dict:
+        return None
+    return dict[key]
 
 def construct_response(status, message, data=None):
     return {
