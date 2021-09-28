@@ -58,10 +58,15 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
       actions: <Widget>[
         Row(
           children: <Widget>[
-            Text("Log out"),
-            IconButton(
-              icon: Icon(Icons.exit_to_app, color: Colors.white),
-              onPressed: onLogoutPressed,
+            InkWell(
+              onTap: onLogoutPressed,
+              child: Row(
+                children: [
+                  Text("Log out"),
+                  SizedBox(width: 10,),
+                  Icon(Icons.exit_to_app, color: Colors.white),
+                ],
+              ),
             ),
             SizedBox(
               width: 10,
