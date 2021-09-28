@@ -129,6 +129,10 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
         getRow(
           "email",
           profileResponse.email,
+        ),
+        getRow(
+          "Login Counts",
+          profileResponse.loginCounts.toString(),
         )
       ],
     );

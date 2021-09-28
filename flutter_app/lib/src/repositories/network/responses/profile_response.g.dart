@@ -11,6 +11,7 @@ ProfileResponse _$ProfileResponseFromJson(Map<String, dynamic> json) {
     username: json['username'] as String,
     fullname: json['fullname'] as String,
     email: json['email'] as String,
+    loginCounts: json['login_counts'] as int,
   );
 }
 
@@ -19,4 +20,5 @@ Map<String, dynamic> _$ProfileResponseToJson(ProfileResponse instance) =>
       'username': instance.username,
       'fullname': instance.fullname,
       'email': instance.email,
+      'login_counts': instance.loginCounts,
     };

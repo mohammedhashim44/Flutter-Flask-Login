@@ -13,7 +13,10 @@ class ProfileResponse {
   @JsonKey()
   String email;
 
-  ProfileResponse({this.username, this.fullname, this.email});
+  @JsonKey(name: "login_counts")
+  int loginCounts;
+
+  ProfileResponse({this.username, this.fullname, this.email,this.loginCounts,});
 
   factory ProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$ProfileResponseFromJson(json);
