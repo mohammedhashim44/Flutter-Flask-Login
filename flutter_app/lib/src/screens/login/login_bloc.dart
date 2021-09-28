@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_flask_login/API.dart';
 import 'package:flutter_flask_login/src/repositories/auth_repository.dart';
 import 'package:flutter_flask_login/src/repositories/network/api_repository.dart';
 import 'package:flutter_flask_login/src/utils/service_locator.dart';
