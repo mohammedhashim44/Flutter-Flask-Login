@@ -10,9 +10,12 @@ Flutter app integrated with Flask server with login and registration functionali
 ### Clone the repo 
 
 ### Flask Part
-- Go to  `flask_app` directory 
+- Python version used is `3.8.5`
+- Go to  `flask_app` directory
+- Install the required packages by running  `pip3 install -r requirements.txt`
 - Open the terminal and type `python3 run.py` .The server will start and the database will be created 
-  
+- The server will run on `http://0.0.0.0:5000/`
+- To access admin panel go to `http://0.0.0.0:5000/admin/`
 ### App Part
 - Open the `flutter_app` with android studio 
 - Run the project, it will take some time to install the dependencies 
