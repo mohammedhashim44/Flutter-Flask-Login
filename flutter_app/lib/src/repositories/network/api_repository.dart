@@ -16,12 +16,20 @@ String registerEndPoint(String baseUrl) => baseUrl + "register";
 String getProfileEndPoint(String baseUrl) => baseUrl + "get_profile";
 
 class ApiRepository {
-  ApiRepository(this.baseUrl);
+  ApiRepository(this.baseUrl) {
+    initDio();
+  }
 
   String baseUrl;
 
-  final Dio _dio = Dio();
+  Dio _dio;
+
   var sharedPreferencesRepo = serviceLocator.get<Preferences>();
+
+  void initDio() {
+    _dio = Dio();
+    _dio.options.headers['content-Type'] = 'application/json';
+  }
 
   void updateBaseUrl(String url) async {
     this.baseUrl = url;
@@ -77,11 +85,6 @@ class ApiRepository {
       var response = await _dio.post(
         url,
         data: data,
-        options: Options(
-          headers: {
-            'content-Type': 'application/json',
-          },
-        ),
       );
       return BaseResponse.fromJson(response.data);
     } catch (error) {
