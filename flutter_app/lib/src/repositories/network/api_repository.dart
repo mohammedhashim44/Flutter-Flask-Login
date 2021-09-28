@@ -15,20 +15,26 @@ String registerEndPoint(String baseUrl) => baseUrl + "register";
 
 String getProfileEndPoint(String baseUrl) => baseUrl + "get_profile";
 
+int timeoutInSeconds = 10;
+
 class ApiRepository {
+
+  Dio _dio;
+  String baseUrl;
+  var sharedPreferencesRepo = serviceLocator.get<Preferences>();
+
   ApiRepository(this.baseUrl) {
     initDio();
   }
 
-  String baseUrl;
-
-  Dio _dio;
-
-  var sharedPreferencesRepo = serviceLocator.get<Preferences>();
-
   void initDio() {
-    _dio = Dio();
-    _dio.options.headers['content-Type'] = 'application/json';
+    BaseOptions options = new BaseOptions(
+        connectTimeout: timeoutInSeconds *1000,
+        receiveTimeout: timeoutInSeconds *1000,
+        headers: {'content-Type':'application/json'},
+    );
+
+    _dio = Dio(options);
   }
 
   void updateBaseUrl(String url) async {
