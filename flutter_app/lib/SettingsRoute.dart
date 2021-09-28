@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_flask_login/src/repositories/settings_repository.dart';
+import 'package:flutter_flask_login/src/utils/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'src/repositories/network/api_repository.dart';
+import 'src/repositories/network/api_repository.dart';
+import 'src/utils/service_locator.dart';
+import 'src/utils/service_locator.dart';
+import 'src/widgets/dialogues.dart';
+import 'src/widgets/dialogues.dart';
 
 class SettingsRoute extends StatefulWidget {
   @override
@@ -7,83 +16,144 @@ class SettingsRoute extends StatefulWidget {
 }
 
 class SettingsRouteState extends State<SettingsRoute> {
+  var settingsRepo = serviceLocator.get<SettingsRepository>();
 
-  SharedPreferences sharedPreferences ;
-
-  var formKey = GlobalKey<FormState>() ;
-  var scaffoldKey = GlobalKey<ScaffoldState>() ;
-
-  var URLController = TextEditingController();
-
-  String formURL = "" ;
+  var formKey = GlobalKey<FormState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+  var urlController = TextEditingController();
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     setData();
   }
 
-  void setData() async{
-    sharedPreferences = await SharedPreferences.getInstance() ;
-    String settingURL = sharedPreferences.getString("URL") ?? "http://192.168.1.1:5000" ;
-    URLController.text = settingURL;
+  void setData() async {
+    String url = await settingsRepo.getSavedURL();
+    urlController.text = url;
   }
 
-  void save() async{
-    formKey.currentState.save();
-    sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setString("URL", formURL) ;
-
-    scaffoldKey.currentState.showSnackBar(
-      new SnackBar(
-        content: Text("Saved"),
-      )
-    );
-
-  }
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        home: Scaffold(
-            key: scaffoldKey,
-            appBar: AppBar(
-              title: Row(
-
-                children: <Widget>[
-                  InkWell(
-                    child: Icon(Icons.chevron_left),
-                    onTap: () => Navigator.pushReplacementNamed(context, '/login'),
-                  ),
-                  Text("Settings"),
-                ],
-              )
+      home: Scaffold(
+        key: scaffoldKey,
+        appBar: AppBar(
+            title: Row(
+          children: <Widget>[
+            InkWell(
+              child: Icon(Icons.chevron_left),
+              onTap: () => Navigator.pop(context),
             ),
-            body: Container(
-              padding: const EdgeInsets.all(10.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text("URL" ,
-                      textAlign: TextAlign.left,
-                    ) ,
-                    TextFormField(
-                      controller: URLController,
-                      onSaved: (value) => formURL = value,
-                    ),
-                    RaisedButton(
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      child: Text("Save"),
-                      onPressed: save,
-                    )
-                  ],
-                )
-              )
-            )
-        )
+            Text("Settings"),
+          ],
+        )),
+        body: Container(
+          padding: const EdgeInsets.all(10.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "URL",
+                  textAlign: TextAlign.left,
+                ),
+                TextFormField(
+                  controller: urlController,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty)
+                      return "Field can't be empty";
+                    return null;
+                  },
+                ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _buildSaveButton(),
+                      _buildTestConnectionButton(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
+  }
+
+  Widget _buildSaveButton() {
+    return RaisedButton(
+      color: Colors.blue,
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 20,
+      ),
+      textColor: Colors.white,
+      child: Text(
+        "Save",
+      ),
+      onPressed: onSaveButtonClicked,
+    );
+  }
+
+  Widget _buildTestConnectionButton() {
+    return RaisedButton(
+      color: Colors.blue,
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 20,
+      ),
+      textColor: Colors.white,
+      child: Text(
+        "Test Connection",
+      ),
+      onPressed: onTestConnectionClicked,
+    );
+  }
+
+  void onSaveButtonClicked()async {
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      String url = urlController.text;
+
+      await settingsRepo.saveURL(url);
+
+      // Update dio url
+      var apiRepo = serviceLocator.get<ApiRepository>();
+      apiRepo.updateBaseUrl(url);
+
+      scaffoldKey.currentState.showSnackBar(
+        new SnackBar(
+          content: Text("Saved"),
+        ),
+      );
+
+      FocusScope.of(context).unfocus();
+    }
+  }
+
+  void onTestConnectionClicked() async {
+    var apiRepo = serviceLocator.get<ApiRepository>();
+    var x = await apiRepo.testConnection();
+    if (x == true) {
+      showDialog(
+        context: context,
+        builder: (context){
+          return SuccessDialog("Connection is working");
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context){
+          return ErrorDialog("Connection Error\nPlease check server and url!");
+        },
+      );
+    }
   }
 }

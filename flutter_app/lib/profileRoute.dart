@@ -9,9 +9,11 @@ class ProfileRoute extends StatefulWidget {
 class ProfileRouteState extends State<ProfileRoute> {
   SharedPreferences sharedPreferences;
 
-  String email ;
-  String username ;
-  String fullname ;
+  String email;
+
+  String username;
+
+  String fullname;
 
   @override
   void initState() {
@@ -25,7 +27,6 @@ class ProfileRouteState extends State<ProfileRoute> {
       username = sharedPreferences.getString("username") ?? "Error";
       fullname = sharedPreferences.getString("fullname") ?? "Error";
       email = sharedPreferences.getString("email") ?? "Error";
-
     });
   }
 
@@ -35,20 +36,19 @@ class ProfileRouteState extends State<ProfileRoute> {
     Navigator.of(context).pushReplacementNamed('/login');
   }
 
-  Widget getRow(String string,double textSize , double opacity){
+  Widget getRow(String string, double textSize, double opacity) {
     return Opacity(
       opacity: opacity,
-      child:  new Container(
+      child: new Container(
         margin: const EdgeInsets.only(top: 20.0),
-        child : new Text(string ,
-          style: new TextStyle(
-              color: Colors.white ,
-              fontSize: textSize
-          ),
+        child: new Text(
+          string,
+          style: new TextStyle(color: Colors.white, fontSize: textSize),
         ),
       ),
-    ) ;
+    );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,30 +69,30 @@ class ProfileRouteState extends State<ProfileRoute> {
       body: new Container(
         margin: const EdgeInsets.all(20.0),
         padding: const EdgeInsets.all(20.0),
-        decoration:  new BoxDecoration(
+        decoration: new BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0, 1],
-                colors: [Colors.blueAccent, Colors.deepPurple],
-                tileMode: TileMode.repeated),
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              //stops: [0, 1],
+              //colors: [Colors.blueAccent, Colors.deepPurple],
+              //tileMode: TileMode.repeated,
+            ),
             borderRadius: BorderRadius.circular(10.0)),
         alignment: FractionalOffset.center,
         child: new Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
-
           children: <Widget>[
             new Container(
-               child: Icon(Icons.person ,
-                 color: Colors.white,
-                 size: 100.0,
-               ),
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 100.0,
+              ),
             ),
             getRow(username, 30.0, 1.0),
             getRow(fullname, 15.0, 0.6),
             getRow(email, 15.0, 0.6)
-
           ],
         ),
       ),

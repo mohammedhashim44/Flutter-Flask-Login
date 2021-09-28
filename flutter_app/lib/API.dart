@@ -75,21 +75,23 @@ class APIState extends State<API> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          child: new Dialog(
-            child: Container(
-                height: 100.0,
-                child: new Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      new CircularProgressIndicator(),
-                      new Text("Loading"),
-                    ],
-                  ),
-                )),
-          ),
+          builder: (context){
+            return Dialog(
+              child: Container(
+                  height: 100.0,
+                  child: new Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        new CircularProgressIndicator(),
+                        new Text("Loading"),
+                      ],
+                    ),
+                  )),
+            );
+          },
         );
       }
     }
@@ -154,7 +156,7 @@ class APIState extends State<API> {
 
 
     void showAlertDialog() {
-      showDialog(
+      /*showDialog(
         context: context,
         child: new AlertDialog(
           title: Text(dialogHead),
@@ -166,7 +168,7 @@ class APIState extends State<API> {
             ),
           ],
         ),
-      );
+      );*/
     }
 
     Widget getForm(){
@@ -178,7 +180,7 @@ class APIState extends State<API> {
 
         home: new Scaffold(
 
-          resizeToAvoidBottomPadding: false,
+          //resizeToAvoidBottomPadding: false,
           key: scaffoldKey,
           appBar: new AppBar(
             title: Row(
@@ -188,7 +190,7 @@ class APIState extends State<API> {
                 InkWell(
                   child: Icon(Icons.settings),
                   onTap: (){
-                    Navigator.pushReplacementNamed(context, '/settings') ;
+                    Navigator.pushNamed(context, '/settings') ;
                   },
                 )
               ],
