@@ -15,7 +15,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   void initState() {
     super.initState();
-    //_resolveNextPage();
+    _resolveNextPage();
   }
 
   void _resolveNextPage() async {
