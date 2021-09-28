@@ -37,7 +37,10 @@ class SettingsScreenState extends State<SettingsScreen> {
         automaticallyImplyLeading: true,
       ),
       body: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
         child: Form(
           key: formKey,
           child: Column(
@@ -61,6 +64,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(height: 20,),
                     _buildSaveButton(),
                     _buildTestConnectionButton(),
                   ],
