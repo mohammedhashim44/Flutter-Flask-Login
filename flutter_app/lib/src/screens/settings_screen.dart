@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flask_login/src/repositories/settings_repository.dart';
 import 'package:flutter_flask_login/src/utils/service_locator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../repositories/network/api_repository.dart';
 import '../repositories/network/api_repository.dart';
 import '../utils/service_locator.dart';
-import '../utils/service_locator.dart';
-import '../widgets/dialogues.dart';
 import '../widgets/dialogues.dart';
 
 class SettingsScreen extends StatefulWidget {

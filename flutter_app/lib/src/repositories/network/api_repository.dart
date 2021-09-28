@@ -26,8 +26,6 @@ class ApiRepository {
   }
 
   Future<bool> testConnection() async {
-    print("*" * 50);
-    print(testConnectionEndPoint);
     try {
       Response response = await _dio.get(testConnectionEndPoint(baseUrl));
       if (response.statusCode == 200) return true;
