@@ -133,8 +133,18 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 
   void onTestConnectionClicked() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AppLoadingDialog(),
+    );
+
     var apiRepo = serviceLocator.get<ApiRepository>();
     var x = await apiRepo.testConnection();
+
+    // Hide dialogue
+    Navigator.pop(context);
+
     if (x == true) {
       showDialog(
         context: context,
