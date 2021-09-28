@@ -35,6 +35,10 @@ def login():
         return jsonify(response)
 
     else:
+        # Increase login count by 1
+        user.login_counts = user.login_counts + 1
+        db.session.commit()
+
         status = True
         message = "User logged in"
         data = {"token" : str(user.id)}
