@@ -62,7 +62,7 @@ def get_profile():
     else:
         status = True
         message = "User found"
-        data = user.getJsonData()
+        data = user.get_json_data()
         response = construct_response(status=status, message=message, data=data)
         return jsonify(response)
 
