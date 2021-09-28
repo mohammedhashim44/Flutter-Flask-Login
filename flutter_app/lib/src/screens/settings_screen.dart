@@ -30,51 +30,43 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-            title: Row(
-          children: <Widget>[
-            InkWell(
-              child: Icon(Icons.chevron_left),
-              onTap: () => Navigator.pop(context),
-            ),
-            Text("Settings"),
-          ],
-        )),
-        body: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "URL",
-                  textAlign: TextAlign.left,
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: AppBar(
+        title: Text("Settings"),
+        automaticallyImplyLeading: true,
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "URL",
+                textAlign: TextAlign.left,
+              ),
+              TextFormField(
+                controller: urlController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty)
+                    return "Field can't be empty";
+                  return null;
+                },
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _buildSaveButton(),
+                    _buildTestConnectionButton(),
+                  ],
                 ),
-                TextFormField(
-                  controller: urlController,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty)
-                      return "Field can't be empty";
-                    return null;
-                  },
-                ),
-                Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildSaveButton(),
-                      _buildTestConnectionButton(),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
