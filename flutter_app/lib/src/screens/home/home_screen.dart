@@ -139,7 +139,7 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
   }
 
   Widget getRow(String label, String string) {
-    double fontSiz = 18;
+    double fontSiz = 16;
     return Container(
       margin: EdgeInsets.symmetric(
         vertical: 10,
