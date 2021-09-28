@@ -1,7 +1,7 @@
 import 'package:flutter_flask_login/src/repositories/shared_preferences_repository.dart';
 import 'package:flutter_flask_login/src/utils/service_locator.dart';
 
-String defaultURL = "http://192.168.1.1:5000";
+String defaultURL = "http://192.168.1.1:5000/API/";
 
 class SettingsRepository {
   SettingsRepository();
