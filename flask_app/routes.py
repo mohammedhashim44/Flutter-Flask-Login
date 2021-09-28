@@ -1,15 +1,19 @@
 from flask import Flask, request, jsonify
 from app import app, db
 from models import User
-
+import time
 
 @app.route('/')
 def home():
     return "Home"
 
+@app.route('/API/test')
+def test_api():
+    return "Home"
 
 @app.route('/API/login', methods=['POST'])
 def login():
+    time.sleep(1)
     username = request.form.get('username')
     password = request.form.get('password')
 
@@ -29,6 +33,27 @@ def login():
     else:
         status = True
         message = "User logged in"
+        #data = user.getJsonData()
+        data = {"token" : str(user.id)}
+        response = construct_response(status=status, message=message, data=data)
+        return jsonify(response)
+
+
+@app.route('/API/get_profile', methods=['POST'])
+def get_profile():
+    time.sleep(1)
+    token = request.form.get('token')
+
+    user = User.query.filter_by(id=token).first()
+    if user is None:
+        status = False
+        message = "User not found"
+        response = construct_response(status=status, message=message)
+        return jsonify(response)
+
+    else:
+        status = True
+        message = "User found"
         data = user.getJsonData()
         response = construct_response(status=status, message=message, data=data)
         return jsonify(response)
@@ -36,6 +61,7 @@ def login():
 
 @app.route('/API/register', methods=['POST'])
 def register():
+    time.sleep(1)
     username = request.form.get('username')
     fullname = request.form.get('fullname')
     password = request.form.get('password')
@@ -93,6 +119,6 @@ def validate_list_of_strings(list):
 def construct_response(status, message, data=None):
     return {
         "status": status,
-        "message": message,
+            "message": message,
         "data": data
     }
