@@ -10,7 +10,6 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-
   AuthRepository authRepository = serviceLocator.get<AuthRepository>();
 
   @override
@@ -19,24 +18,22 @@ class _LandingScreenState extends State<LandingScreen> {
     _resolveNextPage();
   }
 
-  void _resolveNextPage() async{
-    if(await _navigateIfUserLoggedIn())
-      return;
+  void _resolveNextPage() async {
+    if (await _navigateIfUserLoggedIn()) return;
 
     await _navigateToLoginScreen();
-
   }
 
-  Future<bool> _navigateIfUserLoggedIn() async{
+  Future<bool> _navigateIfUserLoggedIn() async {
     bool userLoggedIn = await authRepository.isUserLoggedIn();
-    if(userLoggedIn){
+    if (userLoggedIn) {
       Navigator.of(context).pushReplacementNamed("/home");
       return true;
     }
     return false;
   }
 
-  Future<void> _navigateToLoginScreen() async{
+  Future<void> _navigateToLoginScreen() async {
     Navigator.of(context).pushReplacementNamed("/login");
   }
 

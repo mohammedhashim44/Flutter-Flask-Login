@@ -7,28 +7,27 @@ Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 Preferences preferences = Preferences();
 
 class Preferences {
-
   Future<bool> clearAll() async {
     final SharedPreferences prefs = await _prefs;
     return await prefs.clear();
   }
 
-  Future<String> getUserToken() async{
+  Future<String> getUserToken() async {
     final prefs = await _prefs;
     return prefs.getString(_userTokenKey) ?? "";
   }
 
-  Future<void> setUserToken(String token)async{
+  Future<void> setUserToken(String token) async {
     final prefs = await _prefs;
     await prefs.setString(_userTokenKey, token);
   }
 
-  Future<String> getURL() async{
+  Future<String> getURL() async {
     final prefs = await _prefs;
     return prefs.getString(_URLKey) ?? "";
   }
 
-  Future<void> setURL(String url)async{
+  Future<void> setURL(String url) async {
     final prefs = await _prefs;
     await prefs.setString(_URLKey, url);
   }

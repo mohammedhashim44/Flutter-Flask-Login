@@ -32,7 +32,7 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
       body: Container(
         margin: const EdgeInsets.all(20.0),
         padding: const EdgeInsets.all(20.0),
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -41,10 +41,8 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
             borderRadius: BorderRadius.circular(10.0)),
         child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (_, state) {
-            if (state is ProfileLoading)
-              return _buildLoadingWidget();
-            if (state is ProfileError)
-              return _buildErrorWidget(state.error);
+            if (state is ProfileLoading) return _buildLoadingWidget();
+            if (state is ProfileError) return _buildErrorWidget(state.error);
             if (state is ProfileSuccess)
               return _buildProfileWidget(state.profileResponse);
             return Center();
@@ -58,10 +56,10 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
     return AppBar(
       title: Text('Profile Screen'),
       actions: <Widget>[
-        new Row(
+        Row(
           children: <Widget>[
             Text("Log out"),
-            new IconButton(
+            IconButton(
               icon: Icon(Icons.exit_to_app, color: Colors.white),
               onPressed: onLogoutPressed,
             ),
@@ -113,7 +111,7 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        new Container(
+        Container(
           child: Icon(
             Icons.person,
             color: Colors.white,
@@ -149,12 +147,12 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
           children: [
             Text(
               label + ":",
-              style: new TextStyle(color: Colors.white, fontSize: fontSiz),
+              style: TextStyle(color: Colors.white, fontSize: fontSiz),
             ),
             Spacer(),
             Text(
               string,
-              style: new TextStyle(color: Colors.white, fontSize: fontSiz),
+              style: TextStyle(color: Colors.white, fontSize: fontSiz),
             ),
           ],
         ),

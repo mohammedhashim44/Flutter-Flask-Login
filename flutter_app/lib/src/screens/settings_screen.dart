@@ -30,7 +30,7 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
@@ -111,7 +111,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void onSaveButtonClicked()async {
+  void onSaveButtonClicked() async {
     if (formKey.currentState.validate()) {
       formKey.currentState.save();
       String url = urlController.text;
@@ -123,7 +123,7 @@ class SettingsScreenState extends State<SettingsScreen> {
       apiRepo.updateBaseUrl(url);
 
       scaffoldKey.currentState.showSnackBar(
-        new SnackBar(
+        SnackBar(
           content: Text("Saved"),
         ),
       );
@@ -138,14 +138,14 @@ class SettingsScreenState extends State<SettingsScreen> {
     if (x == true) {
       showDialog(
         context: context,
-        builder: (context){
+        builder: (context) {
           return SuccessDialog("Connection is working");
         },
       );
     } else {
       showDialog(
         context: context,
-        builder: (context){
+        builder: (context) {
           return ErrorDialog("Connection Error\nPlease check server and url!");
         },
       );

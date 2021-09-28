@@ -15,7 +15,6 @@ class AttemptRegister extends RegisterEvent {
   final String password;
 
   AttemptRegister(this.username, this.fullname, this.email, this.password);
-
 }
 
 /// STATES

@@ -39,8 +39,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   @override
   Stream<ProfileState> mapEventToState(
-      ProfileEvent event,
-      ) async* {
+    ProfileEvent event,
+  ) async* {
     if (event is LoadProfile) {
       yield* onLoadProfile(event);
     }

@@ -152,15 +152,15 @@ class _RegisterBuilderScreenState extends State<RegisterBuilderScreen> {
   Widget _buildGoToLoginScreenSection() {
     return Container(
       margin: const EdgeInsets.only(top: 10.0),
-      child: new Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Text("Already Register ? "),
-          new InkWell(
+          Text("Already Register ? "),
+          InkWell(
             onTap: goToLoginScreen,
-            child: new Text(
+            child: Text(
               "Login now",
-              style: new TextStyle(color: Colors.blueAccent),
+              style: TextStyle(color: Colors.blueAccent),
             ),
           )
         ],

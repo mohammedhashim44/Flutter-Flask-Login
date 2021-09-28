@@ -5,7 +5,6 @@ import 'package:flutter_flask_login/src/screens/login/login_screen.dart';
 import 'package:flutter_flask_login/src/screens/register/register_screen.dart';
 import 'package:flutter_flask_login/src/screens/settings_screen.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
 
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/landing': (context) => LandingScreen(),
         '/login': (context) => LoginScreen(),
-        '/register' : (context) => RegisterScreen(),
+        '/register': (context) => RegisterScreen(),
         '/home': (context) => HomeScreen(),
         '/settings': (context) => SettingsScreen()
       },

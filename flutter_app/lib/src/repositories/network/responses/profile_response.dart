@@ -13,11 +13,10 @@ class ProfileResponse {
   @JsonKey()
   String email;
 
-  ProfileResponse({this.username,this.fullname,this.email});
+  ProfileResponse({this.username, this.fullname, this.email});
 
   factory ProfileResponse.fromJson(Map<String, dynamic> json) =>
       _$ProfileResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileResponseToJson(this);
-
 }

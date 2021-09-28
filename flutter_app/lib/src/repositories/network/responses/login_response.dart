@@ -13,5 +13,4 @@ class LoginResponse {
       _$LoginResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
-
 }

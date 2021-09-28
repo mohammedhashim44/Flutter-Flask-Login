@@ -16,13 +16,13 @@ class AppDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: new Text(
+      title: Text(
         title,
         style: TextStyle(
           color: titleColor,
         ),
       ),
-      content: new Text(message),
+      content: Text(message),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
       actions: <Widget>[
@@ -69,11 +69,11 @@ class AppLoadingDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: new Text(
+      title: Text(
         "Please wait ...",
       ),
       //content: new Text("Loading"),
-      content: new Container(
+      content: Container(
         padding: EdgeInsets.symmetric(
           vertical: 10,
         ),
@@ -82,7 +82,9 @@ class AppLoadingDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text("Loading"),
           ],
         ),
