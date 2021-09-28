@@ -10,7 +10,9 @@ import 'server_error.dart';
 String testConnectionEndPoint(String baseUrl) => baseUrl + "test";
 
 String loginEndPoint(String baseUrl) => baseUrl + "login";
+
 String registerEndPoint(String baseUrl) => baseUrl + "register";
+
 String getProfileEndPoint(String baseUrl) => baseUrl + "get_profile";
 
 class ApiRepository {
@@ -60,10 +62,10 @@ class ApiRepository {
     return response;
   }
 
-  Future<BaseResponse<ProfileResponse>> loadProfile(String token) async{
+  Future<BaseResponse<ProfileResponse>> loadProfile(String token) async {
     BaseResponse<ProfileResponse> response = await performRequest(
       url: getProfileEndPoint(baseUrl),
-      data: {"token" : token},
+      data: {"token": token},
     );
     return response;
   }
@@ -72,7 +74,15 @@ class ApiRepository {
   Future<BaseResponse<T>> performRequest<T>(
       {String url, Map<String, dynamic> data = const {}}) async {
     try {
-      var response = await _dio.post(url, data: FormData.fromMap(data));
+      var response = await _dio.post(
+        url,
+        data: data,
+        options: Options(
+          headers: {
+            'content-Type': 'application/json',
+          },
+        ),
+      );
       return BaseResponse.fromJson(response.data);
     } catch (error) {
       return BaseResponse(status: false)
