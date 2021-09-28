@@ -9,6 +9,7 @@ def home():
 
 @app.route('/API/test')
 def test_api():
+    time.sleep(1)
     return "Home"
 
 @app.route('/API/login', methods=['POST'])
