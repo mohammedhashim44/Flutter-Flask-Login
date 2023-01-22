@@ -139,7 +139,7 @@ class _LoginScreenBuilderState extends State<LoginScreenBuilder> {
 
   Widget _buildButton(LoginState state) {
     bool isDisabled = state is LoginLoading;
-    return RaisedButton(
+    return ElevatedButton(
       child: Text("Login"),
       onPressed: isDisabled ? null : onLoginPressed,
     );

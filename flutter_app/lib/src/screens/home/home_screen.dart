@@ -63,7 +63,9 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
               child: Row(
                 children: [
                   Text("Log out"),
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Icon(Icons.exit_to_app, color: Colors.white),
                 ],
               ),
@@ -101,10 +103,8 @@ class _HomeScreenBuilderState extends State<HomeScreenBuilder> {
             error,
             style: TextStyle(color: Colors.white),
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text("Try Again"),
-            color: Colors.blue,
-            textColor: Colors.white,
             onPressed: () {
               BlocProvider.of<ProfileBloc>(context).add(LoadProfile());
             },

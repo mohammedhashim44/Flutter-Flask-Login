@@ -64,7 +64,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     _buildSaveButton(),
                     _buildTestConnectionButton(),
                   ],
@@ -78,13 +80,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildSaveButton() {
-    return RaisedButton(
-      color: Colors.blue,
-      padding: EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 20,
-      ),
-      textColor: Colors.white,
+    return ElevatedButton(
       child: Text(
         "Save",
       ),
@@ -93,13 +89,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 
   Widget _buildTestConnectionButton() {
-    return RaisedButton(
-      color: Colors.blue,
-      padding: EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 20,
-      ),
-      textColor: Colors.white,
+    return ElevatedButton(
       child: Text(
         "Test Connection",
       ),
@@ -118,7 +108,7 @@ class SettingsScreenState extends State<SettingsScreen> {
       var apiRepo = serviceLocator.get<ApiRepository>();
       apiRepo.updateBaseUrl(url);
 
-      scaffoldKey.currentState.showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Saved"),
         ),

@@ -148,7 +148,7 @@ class _RegisterBuilderScreenState extends State<RegisterBuilderScreen> {
 
   Widget _buildButton(RegisterState state) {
     bool isDisabled = state is RegisterLoading;
-    return RaisedButton(
+    return ElevatedButton(
       child: Text("Register"),
       onPressed: isDisabled ? null : onRegisterButtonPressed,
     );

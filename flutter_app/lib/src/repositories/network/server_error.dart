@@ -19,19 +19,19 @@ class ServerError implements Exception {
 
   _handleError(DioError error) {
     switch (error.type) {
-      case DioErrorType.CANCEL:
+      case DioErrorType.cancel:
         _errorMessage = "Connection Canceled";
         break;
-      case DioErrorType.CONNECT_TIMEOUT:
+      case DioErrorType.connectTimeout:
         _errorMessage = "Connection Timeout";
         break;
-      case DioErrorType.RECEIVE_TIMEOUT:
+      case DioErrorType.receiveTimeout:
         _errorMessage = "Connection Timeout";
         break;
-      case DioErrorType.RESPONSE:
+      case DioErrorType.response:
         _errorMessage = "Invalid Status Code";
         break;
-      case DioErrorType.SEND_TIMEOUT:
+      case DioErrorType.sendTimeout:
         _errorMessage = "Connection Timeout";
         break;
       default:
