@@ -6,3 +6,4 @@ flutter_app/.packages
 flutter_app/android/.gradle/
 flutter_app/.flutter-plugins
 .vscode/
+**/db_path.txt
