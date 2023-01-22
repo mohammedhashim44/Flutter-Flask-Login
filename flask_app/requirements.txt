@@ -1,3 +1,5 @@
 Werkzeug==1.0.1
 Flask==1.1.2
+jinja2<3.1.0
 Flask_SQLAlchemy==2.5.1
+itsdangerous==2.0.1
